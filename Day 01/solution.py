@@ -2,8 +2,10 @@
 
 import os
 import sys
+from typing import Tuple
 
-def elf_mooch_engine(input_filepath: str) -> int:
+
+def elf_mooch_engine(input_filepath: str) -> Tuple[int, int]:
     """Takes the filepath of a text file, which captures the Calories
     contained by the various meals, snacks, rations, etc. that the
     group of elves brought with them and identifies the total calories
@@ -18,11 +20,13 @@ def elf_mooch_engine(input_filepath: str) -> int:
     -------
     int
         calorie count from elf carrying the most calories
+    int
+        total calorie count from top 3 elves carrying the most calories
     """
     with open(os.path.join(sys.path[0], input_filepath), "r") as f:
-        input = f.read()
+        input_file = f.read()
 
-    food_groups = input.split("\n\n")
+    food_groups = input_file.split("\n\n")
     elf_count = len(food_groups)
     elves = {}
 
@@ -33,4 +37,12 @@ def elf_mooch_engine(input_filepath: str) -> int:
             calories_carried.append(int(food_item))
         elves[elf] = sum(calories_carried)
 
-    return max(elves.values())
+    # Part 1 Solution
+    elf_with_most_calories = max(elves.values())
+
+    elves_sorted = dict(sorted(elves.items(), key=lambda item: item[1]))
+
+    # Part 2 Solution
+    total_calories_of_top_3 = sum(list(elves_sorted.values())[-3:])
+
+    return elf_with_most_calories, total_calories_of_top_3
