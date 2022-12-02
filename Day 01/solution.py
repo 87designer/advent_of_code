@@ -6,10 +6,10 @@ from typing import Tuple
 
 
 def elf_mooch_engine(input_filepath: str) -> Tuple[int, int]:
-    """Takes the filepath of a text file, which captures the Calories
-    contained by the various meals, snacks, rations, etc. that the
-    group of elves brought with them and identifies the total calories
-    carried by the elf carrying the most.
+    """Takes the filepath of a text file, reads text file parses
+    list of calories and returns calorie count for the elf
+    carrying the most calories as well as the total calorie count
+    of the top 3 elves in terms of calorie count.
 
     Parameters
     ----------
@@ -19,9 +19,9 @@ def elf_mooch_engine(input_filepath: str) -> Tuple[int, int]:
     Returns
     -------
     int
-        calorie count from elf carrying the most calories
+        calorie count from top elf
     int
-        total calorie count from top 3 elves carrying the most calories
+        total calorie count from top 3 elves
     """
     with open(os.path.join(sys.path[0], input_filepath), "r") as f:
         input_file = f.read()
