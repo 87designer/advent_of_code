@@ -9,7 +9,7 @@ def encrypted_strategy_score_projector(input_filepath: str) -> int:
     """Takes the filepath of a text file, reads text file parses
     encrypted strategy guide for a game of Rock, Paper, Scissors
     and returns the total score if the guide is followed given
-    assumptions outline in the puzzle.
+    confirmed rules outlined in part 2 of the puzzle.
 
     Parameters
     ----------
@@ -19,22 +19,22 @@ def encrypted_strategy_score_projector(input_filepath: str) -> int:
     Returns
     -------
     int
-        projected total score based on assumptions
+        projected total score based on updated rules
     """
     # Construct Classes
-    EncryptedStrategy = namedtuple("EncryptedStrategy", "opponent_play response")
-    Outcome = namedtuple("Outcome", "score")
-    HandShape = namedtuple("Shape", "score A B C")
+    EncryptedStrategy = namedtuple("EncryptedStrategy", "opponent_play desired_outcome")
+    DesiredOutcome = namedtuple("DesiredOutcome", "score A B C")
+    HandShapeScore = namedtuple("HandShapeScore", "score")
 
-    # Establish Outcome Rules
-    win = Outcome(6)
-    draw = Outcome(3)
-    lose = Outcome(0)
+    # Establish HandShape Scores
+    a = HandShapeScore(1)
+    b = HandShapeScore(2)
+    c = HandShapeScore(3)
 
-    # Establish Assumed Hand Shapes
-    x = HandShape(1, "draw", "lose", "win")
-    y = HandShape(2, "win", "draw", "lose")
-    z = HandShape(3, "lose", "win", "draw")
+    # Establish Desired Output Scores & HandShapes
+    x = DesiredOutcome(0, "c", "a", "b")
+    y = DesiredOutcome(3, "a", "b", "c")
+    z = DesiredOutcome(6, "b", "c", "a")
 
     # Parse Text File Identifying Individual Rounds
     with open(os.path.join(sys.path[0], input_filepath), "r") as f:
@@ -48,8 +48,8 @@ def encrypted_strategy_score_projector(input_filepath: str) -> int:
     # Calculate Resulting Scores
     round_scores = []
     for rnd in rps_rounds:
-        outcome = eval(f'{rnd.response.lower()}.{rnd.opponent_play}')
-        score = eval(f'{outcome}.score + {rnd.response.lower()}.score')
+        strategic_hand_shape = eval(f'{rnd.desired_outcome.lower()}.{rnd.opponent_play}')
+        score = eval(f'{rnd.desired_outcome.lower()}.score + {strategic_hand_shape}.score')
         round_scores.append(score)
 
     projected_total_score = sum(round_scores)
