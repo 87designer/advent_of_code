@@ -11,7 +11,6 @@ def assignment_overlap_detector(input_filepath: str) -> Tuple[int, int]:
     one range is completely contained in the other, followed by the count
     of pairs where there is any overlap at all.
 
-
     Parameters
     ----------
     input_filepath : str

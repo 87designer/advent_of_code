@@ -60,36 +60,26 @@ def compare_compartments(input_filepath: str) -> Tuple[int, int]:
     item_rearrangement_priority = {}
     for rucksack in rucksacks:
         compartment1, compartment2 = split_string(rucksack)
-        compartment1_lower = list(filter(lambda c: c.islower(), compartment1))
-        compartment2_lower = list(filter(lambda c: c.islower(), compartment2))
-        item_in_both_compartments = set(compartment1_lower) & set(compartment2_lower)
-        lower_item = list(item_in_both_compartments)
+        compartment1_lower, compartment2_lower = (list(filter(lambda c: c.islower(), c)) for c in [compartment1, compartment2])
+        lower_item = list(set(compartment1_lower) & set(compartment2_lower))
         if lower_item:
             item_rearrangement_priority[rucksack] = {lower_item[0]: item_type_priority.get(lower_item[0])}
 
-        compartment1_upper = list(filter(lambda c: c.isupper(), compartment1))
-        compartment2_upper = list(filter(lambda c: c.isupper(), compartment2))
-        item_in_both_compartments = set(compartment1_upper) & set(compartment2_upper)
-        upper_item = list(item_in_both_compartments)
+        compartment1_upper, compartment2_upper = (list(filter(lambda c: c.isupper(), c)) for c in [compartment1, compartment2])
+        upper_item = list(set(compartment1_upper) & set(compartment2_upper))
         if upper_item:
             item_rearrangement_priority[rucksack] = {upper_item[0]: item_type_priority.get(upper_item[0])}
 
     # Identify Badge Rearrangement Priority
     badge_rearrangement_priority = {}
     for group in groups:
-        pack1_lower = list(filter(lambda c: c.islower(), group[0]))
-        pack2_lower = list(filter(lambda c: c.islower(), group[1]))
-        pack3_lower = list(filter(lambda c: c.islower(), group[2]))
-        item_in_all_packs = set(pack1_lower) & set(pack2_lower) & set(pack3_lower)
-        lower_badge = list(item_in_all_packs)
+        pack1_lower, pack2_lower, pack3_lower = (list(filter(lambda c: c.islower(), g)) for g in group)
+        lower_badge = list(set(pack1_lower) & set(pack2_lower) & set(pack3_lower))
         if lower_badge:
             badge_rearrangement_priority[tuple(group)] = {lower_badge[0]: item_type_priority.get(lower_badge[0])}
 
-        pack1_upper = list(filter(lambda c: c.isupper(), group[0]))
-        pack2_upper = list(filter(lambda c: c.isupper(), group[1]))
-        pack3_upper = list(filter(lambda c: c.isupper(), group[2]))
-        item_in_all_packs = set(pack1_upper) & set(pack2_upper) & set(pack3_upper)
-        upper_badge = list(item_in_all_packs)
+        pack1_upper, pack2_upper, pack3_upper = (list(filter(lambda c: c.isupper(), g)) for g in group)
+        upper_badge = list(set(pack1_upper) & set(pack2_upper) & set(pack3_upper))
         if upper_badge:
             badge_rearrangement_priority[tuple(group)] = {upper_badge[0]: item_type_priority.get(upper_badge[0])}
 

@@ -46,12 +46,9 @@ def encrypted_strategy_score_projector(input_filepath: str) -> int:
         rps_rounds.append(EncryptedStrategy(line_items[0], line_items[1]))
 
     # Calculate Resulting Scores
-    round_scores = []
+    projected_total_score = 0
     for rnd in rps_rounds:
         strategic_hand_shape = eval(f'{rnd.desired_outcome.lower()}.{rnd.opponent_play}')
-        score = eval(f'{rnd.desired_outcome.lower()}.score + {strategic_hand_shape}.score')
-        round_scores.append(score)
-
-    projected_total_score = sum(round_scores)
+        projected_total_score += eval(f'{rnd.desired_outcome.lower()}.score + {strategic_hand_shape}.score')
 
     return projected_total_score
