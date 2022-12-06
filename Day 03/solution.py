@@ -83,7 +83,6 @@ def compare_compartments(input_filepath: str) -> Tuple[int, int]:
         if upper_badge:
             badge_rearrangement_priority[tuple(group)] = {upper_badge[0]: item_type_priority.get(upper_badge[0])}
 
-
     # Identify Sum of Item Type Priorities
     item_type_priorities = []
     for value in item_rearrangement_priority.values():
