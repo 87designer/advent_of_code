@@ -3,7 +3,6 @@
 import os
 import sys
 import re
-from typing import Tuple
 
 
 def main(input_filepath: str) -> str:
