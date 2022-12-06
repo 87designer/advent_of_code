@@ -6,26 +6,40 @@ import re
 from typing import Tuple
 
 
-def main(input_filepath):
-    # Parse Text File Identifying Individual Rucksacks
+def main(input_filepath: str) -> str:
+    """Takes the filepath of a text file, reads text file, parses stacks
+    of supply crates and rearrangement procedure, and projects which supply
+    crates will be on the top of each stack after rearrangement is complete.
+
+    Parameters
+    ----------
+    input_filepath : str
+        filepath to input txt file
+
+    Returns
+    -------
+    str
+        characters identifying top top crate on each stack
+    """
+    # Parse Text File Identifying Supply Crate Stack Drawing & Rearrangement Procedures List
     with open(os.path.join(sys.path[0], input_filepath), "r") as f:
         input_file = f.read()
     crate_drawing, rearrangement_procedure = (v for v in input_file.split("\n\n"))
 
     # Parse Crate Stacks
-    crate_rows = crate_drawing.split("\n")
-    number_of_stacks = int(crate_rows[-1][-1])
-    row_list = []
-    for crate_row in crate_rows[:-1]:
-        row_list.append(re.findall(r"[\w]", crate_row.replace("    ", "_")))
+    crate_level_strings = crate_drawing.split("\n")
+    number_of_stacks = int(crate_level_strings[-1][-1])
+    crate_levels = []
+    for string in crate_level_strings[:-1]:
+        crate_levels.append(re.findall(r"[\w]", string.replace("    ", "_")))
 
     # Establish Matrix
     crate_matrix = {}
     for i in range(number_of_stacks):
         crate_matrix[i] = []
-    for row in row_list:
-        for i in range(len(row)):
-            crate_matrix.get(i).insert(0, row[i])
+    for level in crate_levels:
+        for i in range(len(level)):
+            crate_matrix.get(i).insert(0, level[i])
 
     # Relabel stack names to align with procedure
     for i in reversed(range(number_of_stacks)):
@@ -44,11 +58,11 @@ def main(input_filepath):
     # establish container matrix update logic
     for procedure in procedure_matrix:
         m, f, t = (i for i in procedure)
-        for i in range(m):
-            crate_to_move = crate_matrix.get(f).pop(-1)
-            crate_matrix.get(t).append(crate_to_move)
+        crate_to_move = crate_matrix.get(f)[-m:]
+        del crate_matrix.get(f)[-m:]
+        crate_matrix.get(t).extend(crate_to_move)
 
     # concat top containers
-    ans = ''.join([c[-1] for c in sorted(crate_matrix.values())])
+    top_crates = ''.join([v[-1] for k, v in sorted(crate_matrix.items())])
 
-    return ans
+    return top_crates
