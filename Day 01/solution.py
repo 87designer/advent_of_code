@@ -1,7 +1,6 @@
 # Day 1: Calorie Counting
 
-import os
-import sys
+import input_load as load
 from typing import Tuple
 
 
@@ -23,8 +22,7 @@ def elf_mooch_engine(input_filepath: str) -> Tuple[int, int]:
     int
         total calorie count from top 3 elves
     """
-    with open(os.path.join(sys.path[0], input_filepath), "r") as f:
-        input_file = f.read()
+    input_file = load.txt_to_str(input_filepath)
 
     food_groups = input_file.split("\n\n")
     elf_count = len(food_groups)

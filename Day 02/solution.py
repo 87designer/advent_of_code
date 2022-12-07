@@ -1,7 +1,6 @@
 # Day 2: Rock Paper Scissors
 
-import os
-import sys
+import input_load as load
 from collections import namedtuple
 
 
@@ -37,8 +36,7 @@ def encrypted_strategy_score_projector(input_filepath: str) -> int:
     z = DesiredOutcome(6, "b", "c", "a")
 
     # Parse Text File Identifying Individual Rounds
-    with open(os.path.join(sys.path[0], input_filepath), "r") as f:
-        input_file = f.read()
+    input_file = load.txt_to_str(input_filepath)
     input_lines = input_file.split("\n")
     rps_rounds = []
     for line in input_lines:

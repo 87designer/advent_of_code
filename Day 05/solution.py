@@ -1,11 +1,10 @@
 # Day 4: Supply Stacks
 
-import os
-import sys
+import input_load as load
 import re
 
 
-def main(input_filepath: str) -> str:
+def rearrange_crates(input_filepath: str) -> str:
     """Takes the filepath of a text file, reads text file, parses stacks
     of supply crates and rearrangement procedure, and projects which supply
     crates will be on the top of each stack after rearrangement is complete.
@@ -21,8 +20,7 @@ def main(input_filepath: str) -> str:
         characters identifying top top crate on each stack
     """
     # Parse Text File Identifying Supply Crate Stack Drawing & Rearrangement Procedures List
-    with open(os.path.join(sys.path[0], input_filepath), "r") as f:
-        input_file = f.read()
+    input_file = load.txt_to_str(input_filepath)
     crate_drawing, rearrangement_procedure = (v for v in input_file.split("\n\n"))
 
     # Parse Crate Stacks

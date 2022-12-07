@@ -1,7 +1,6 @@
 # Day 4: Camp Cleanup
 
-import os
-import sys
+import input_load as load
 from typing import Tuple
 
 
@@ -24,8 +23,7 @@ def assignment_overlap_detector(input_filepath: str) -> Tuple[int, int]:
         count of overlapping ranges
     """
     # Parse Text File Identifying Section Clean-up Pairs
-    with open(os.path.join(sys.path[0], input_filepath), "r") as f:
-        input_file = f.read()
+    input_file = load.txt_to_str(input_filepath)
 
     pairs = [pair.split(",") for pair in input_file.split("\n")]
     full_range_pairs = []

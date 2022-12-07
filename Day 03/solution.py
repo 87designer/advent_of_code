@@ -1,10 +1,9 @@
 # Day 3: Rucksack Reorganization
 
-import os
-import sys
 import re
 import string
 from typing import Tuple
+import input_load as load
 
 
 def split_string(s: str) -> Tuple[str, str]:
@@ -51,8 +50,7 @@ def compare_compartments(input_filepath: str) -> Tuple[int, int]:
         item_type_priority[items[i]] = i + 1
 
     # Parse Text File Identifying Individual Rucksacks
-    with open(os.path.join(sys.path[0], input_filepath), "r") as f:
-        input_file = f.read()
+    input_file = load.txt_to_str(input_filepath)
     rucksacks = input_file.split("\n")
     groups = [x.strip().split('\n') for x in re.findall('((?:[^\n]+\n?){1,3})', input_file)]
 
