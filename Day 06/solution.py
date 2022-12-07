@@ -1,7 +1,6 @@
 # Day 6: Tuning Trouble
 
-import os
-import sys
+import input_load as load
 
 
 def comms_signal_lock(input_filepath: str, protocol: int) -> int:
@@ -21,10 +20,10 @@ def comms_signal_lock(input_filepath: str, protocol: int) -> int:
     int
         number of characters before start-of-packet marker
     """
-    with open(os.path.join(sys.path[0], input_filepath), "r") as f:
-        datastream = f.read()
+    datastream = load.txt_to_str(input_filepath)
     characters_to_process = protocol
     tuning = True
+
     while tuning:
         buffer = datastream[characters_to_process-protocol: characters_to_process]
         if len(set(buffer)) < protocol:
