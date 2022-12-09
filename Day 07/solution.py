@@ -4,7 +4,7 @@ import input_load as load
 from typing import Tuple
 
 
-def main(input_filepath: str) -> Tuple[int, int]:
+def find_space(input_filepath: str) -> Tuple[int, int]:
     """Takes the filepath of a text file and reads lines from
     terminal output. Parses terminal commands and sums directories
     with a total size of at most 100000 as well as identifies size
