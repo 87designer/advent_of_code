@@ -1,7 +1,7 @@
 # Day 7:
 
 from collections import defaultdict
-import input_load as load
+from CY22 import input_load as load
 
 input_file = load.txt_to_str('puzzle_input.txt')
 data = input_file.strip()

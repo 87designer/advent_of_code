@@ -1,6 +1,6 @@
 # Day 2: Rock Paper Scissors
 
-import input_load as load
+from CY22 import input_load as load
 from collections import namedtuple
 
 

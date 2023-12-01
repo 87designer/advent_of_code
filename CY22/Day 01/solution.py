@@ -1,6 +1,6 @@
 # Day 1: Calorie Counting
 
-import input_load as load
+from CY22 import input_load as load
 from typing import Tuple
 
 

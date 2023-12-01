@@ -3,7 +3,7 @@
 import re
 import string
 from typing import Tuple
-import input_load as load
+from CY22 import input_load as load
 
 
 def split_string(s: str) -> Tuple[str, str]:

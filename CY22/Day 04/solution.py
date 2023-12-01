@@ -1,6 +1,6 @@
 # Day 4: Camp Cleanup
 
-import input_load as load
+from CY22 import input_load as load
 from typing import Tuple
 
 

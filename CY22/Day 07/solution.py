@@ -1,6 +1,6 @@
 # Day 7: No Space Left On Device
 
-import input_load as load
+from CY22 import input_load as load
 from typing import Tuple
 
 
